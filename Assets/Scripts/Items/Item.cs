@@ -17,5 +17,9 @@ public class Item : MonoBehaviour
 
     [SerializeField] public Texture itemImage;
 
-    [SerializeField] private string fileName;
+    public void SaveMe()
+    {
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
+    }
 }

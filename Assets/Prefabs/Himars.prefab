@@ -108,7 +108,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2e15708fb1abe5f4c8f30d8f07ce116c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -247,4 +247,3 @@ MonoBehaviour:
   itemName: HIMARS
   itemDescription: 
   itemImage: {fileID: 2800000, guid: 001a71843d084f74e874f6a0ecec6032, type: 3}
-  fileName: item

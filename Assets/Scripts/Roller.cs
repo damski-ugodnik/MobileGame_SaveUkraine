@@ -24,7 +24,7 @@ public class Roller : MonoBehaviour
 
     private void Open()
     {
-        new WaitForSeconds(3);
+        new WaitForSeconds(5);
         StartCoroutine(Spin(Random.Range(minSpeed, maxSpeed)));
     }
 

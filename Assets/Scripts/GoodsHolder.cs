@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [Serializable]
-public class GoodsHolder
+public static class GoodsHolder
 {
-    public static List<Item> lastItem;
+    public static ObservableCollection<ObservableCollection<Item>> Items = new ObservableCollection<ObservableCollection<Item>>();
     private static int killedSepars;
-    public static int separsPerSecond = 1;
+    private static int separsPerSecond = 1;
 
     public static int KilledSepars
     {
@@ -17,5 +15,20 @@ public class GoodsHolder
         {
             return killedSepars = (int)(separsPerSecond * Time.realtimeSinceStartup);
         }
+    }
+
+    public static void AddItem(Item item)
+    {
+        foreach(ObservableCollection<Item> col in Items)
+        {
+            if (col[0].itemName == item.itemName)
+            {
+                col.Add(item);
+                return;
+            }
+        }
+        ObservableCollection<Item> tmp = new ObservableCollection<Item>();
+        tmp.Add(item);
+        Items.Add(tmp);
     }
 }
