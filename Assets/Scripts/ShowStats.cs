@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShowStats : MonoBehaviour
 {
-    private Text stats;
+    private TMP_Text stats;
 
     private void Awake()
     {
-        stats = GetComponent<Text>();
+        stats = GetComponent<TMP_Text>();
     }
 
     private void FixedUpdate()

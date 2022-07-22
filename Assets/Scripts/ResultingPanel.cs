@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class ResultingPanel : MonoBehaviour
 {
-    [SerializeField] private Text descriptionText;
-    [SerializeField] private Text titleText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private TMP_Text titleText;
     [SerializeField] private RawImage image;
     private Item claimedItem;
 
