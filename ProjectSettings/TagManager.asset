@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Music
+  - Screen
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ScreenUI
   - Water
   - UI
-  - 
+  - Display
   - 
   - 
   - 
