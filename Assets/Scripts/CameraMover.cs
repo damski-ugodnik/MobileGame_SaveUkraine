@@ -7,6 +7,7 @@ public class CameraMover : MonoBehaviour
     public static CameraMover Instance { get; private set; }
 
     [SerializeField] float timeToMove = 1f;
+    [SerializeField] public GameObject defaultPos;
 
     private void Awake()
     {
@@ -16,10 +17,10 @@ public class CameraMover : MonoBehaviour
     public void MoveToPoint(GameObject target)
     {
 
-        StartCoroutine(Move(target.transform.position, true));
+        StartCoroutine(Move(target.transform.position));
     }
 
-    private IEnumerator Move(Vector3 targetPosition, bool ToTarget)
+    private IEnumerator Move(Vector3 targetPosition)
     {
         Vector3 currentPos = transform.position;
         float timeElapsed = 0;

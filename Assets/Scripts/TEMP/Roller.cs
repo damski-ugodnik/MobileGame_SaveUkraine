@@ -5,28 +5,39 @@ using UnityEngine.UI;
 
 public class Roller : MonoBehaviour
 {
-    [SerializeField] private float maxSpeed = 10f, minSpeed = 1f;
+    [SerializeField] private float maxSpeed = 10f, minSpeed = 7f;
     [SerializeField] private int boxCapacity = 200;
-    [SerializeField] private List<Item> available;
     [SerializeField] private Crosshairs crosshairs;
     [SerializeField] private ResultingPanel resulting;
+    [SerializeField] private GameObject parentPanel;
     private List<Item> items = new List<Item>();
     private RectTransform m_RectTransform;
-    
+    private Vector3 startPosition;
+
     private void Awake()
     {
         m_RectTransform = GetComponent<RectTransform>();
         m_RectTransform.sizeDelta = new Vector2(boxCapacity * 90, 60);
-        for(int i = 0; i < boxCapacity; i++)
+        startPosition = transform.localPosition;
+    } 
+
+    public void InitializeCase(Crate crate)
+    {
+        Item tmp;
+        transform.localPosition = startPosition;
+        for (int i = 0; i < boxCapacity; i++)
         {
-            items.Add(Instantiate(available[Random.Range(0, available.Count )], transform));
+            tmp = Instantiate(crate.AvailableNomenclature[Random.Range(0, crate.AvailableNomenclature.Count)], transform);
+            tmp.gameObject.isStatic = true;
+            items.Add(tmp);
         }
-        Open();
     }
 
-    private void Open()
+    public void Open()
     {
+        parentPanel.SetActive(true);
         new WaitForSeconds(5);
+        Debug.Log("start spin");
         StartCoroutine(Spin(Random.Range(minSpeed, maxSpeed)));
     }
 
@@ -35,10 +46,15 @@ public class Roller : MonoBehaviour
         while(speed > 0)
         {
             GetComponent<RectTransform>().localPosition += Vector3.left * speed;
-            speed -= Time.deltaTime;
+            speed -= Time.smoothDeltaTime;
             yield return null;
         }
-        DefinePrize();
+        speed = 0;
+        if(speed == 0)
+        {
+            DefinePrize(); 
+            yield break;
+        }
     }
 
     private void DefinePrize()

@@ -10,6 +10,8 @@ public class ResultingPanel : MonoBehaviour
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private RawImage image;
+    [SerializeField] private GameObject CaseChoicePanel;
+    [SerializeField] private GameObject parentPanel;
     private Item claimedItem;
 
     public void Show(Item prize)
@@ -22,10 +24,11 @@ public class ResultingPanel : MonoBehaviour
 
     public void Claim()
     {
-        claimedItem.SaveMe();
         GoodsHolder.AddItem(claimedItem);
         gameObject.SetActive(false);
-        SceneManager.LoadScene("MainMenuScene");
+        parentPanel.SetActive(false);
+        CaseChoicePanel.SetActive(true);
+        CaseChoicePanel.GetComponentInChildren<DescriptionPanel>().RebootCrate();
     }
 
 }
