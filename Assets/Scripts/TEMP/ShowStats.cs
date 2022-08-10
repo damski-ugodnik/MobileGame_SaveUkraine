@@ -6,17 +6,11 @@ using TMPro;
 
 public class ShowStats : MonoBehaviour
 {
-    private TMP_Text stats;
-
-    private void Awake()
-    {
-        stats = GetComponent<TMP_Text>();
-    }
+    [SerializeField] private TMP_Text m_Text;
 
     private void FixedUpdate()
     {
-        stats.text = string.Format(
-            "killed russians: {0}\n" +
-            "$$$: {1}", GoodsHolder.KilledSepars, 0);
+        m_Text.text = string.Format("Killed Russians: {0}\n" +
+            "Russians per Second: {1}", GoodsHolder.KilledSepars, GoodsHolder.RussiansPerSecond);
     }
 }

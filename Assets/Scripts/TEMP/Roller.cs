@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class Roller : MonoBehaviour
 {
-    [SerializeField] private float maxSpeed = 10f, minSpeed = 7f;
+    [SerializeField] private float maxSpeed, minSpeed;
     [SerializeField] private int boxCapacity = 200;
     [SerializeField] private Crosshairs crosshairs;
     [SerializeField] private ResultingPanel resulting;
     [SerializeField] private GameObject parentPanel;
-    private List<Item> items = new List<Item>();
+    [SerializeField] private DescrPanel descrPanel;
+    private List<Weapon> items = new List<Weapon>();
     private RectTransform m_RectTransform;
     private Vector3 startPosition;
+    private bool IsRolling = false;
 
     private void Awake()
     {
@@ -23,7 +25,7 @@ public class Roller : MonoBehaviour
 
     public void InitializeCase(Crate crate)
     {
-        Item tmp;
+        Weapon tmp;
         transform.localPosition = startPosition;
         for (int i = 0; i < boxCapacity; i++)
         {
@@ -35,6 +37,11 @@ public class Roller : MonoBehaviour
 
     public void Open()
     {
+        if (IsRolling)
+        {
+            return;
+        }
+        IsRolling = true;
         parentPanel.SetActive(true);
         new WaitForSeconds(5);
         Debug.Log("start spin");
@@ -43,22 +50,26 @@ public class Roller : MonoBehaviour
 
     private IEnumerator Spin(float speed)
     {
+        Debug.Log(speed);
         while(speed > 0)
         {
-            GetComponent<RectTransform>().localPosition += Vector3.left * speed;
-            speed -= Time.smoothDeltaTime;
+            GetComponent<RectTransform>().localPosition += Vector3.left * speed*200*Time.deltaTime;
+            speed -= Time.deltaTime;
             yield return null;
         }
         speed = 0;
         if(speed == 0)
         {
-            DefinePrize(); 
+            DefinePrize();
+            IsRolling = false;
             yield break;
         }
     }
 
     private void DefinePrize()
     {
-        resulting.Show(crosshairs.lastCollision.GetComponent<Item>());
+        Weapon weapon = crosshairs.lastCollision.GetComponent<Weapon>();
+        resulting.Claim(weapon);
+        descrPanel.Show(weapon.WeaponSerializable);
     }
 }

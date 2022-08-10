@@ -16,11 +16,6 @@ public class ScreenProcessor : MonoBehaviour
         raycaster = GetComponent<GraphicRaycaster>();
     }
 
-    public void ZoomOut()
-    {
-        
-    }
-
     public void OnScreenInput(Vector2 normalisedPosition)
     {
         Vector3 position = new Vector3(canvasTransform.sizeDelta.x * normalisedPosition.x,
@@ -40,10 +35,12 @@ public class ScreenProcessor : MonoBehaviour
             if (mouseDown)
             {
                 ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.pointerDownHandler);
+                ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.dragHandler);
             }
             else if (mouseUp)
             {
                 ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.pointerUpHandler);
+                ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.endDragHandler);
                 ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.pointerClickHandler);
             }
         }

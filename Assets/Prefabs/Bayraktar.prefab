@@ -111,5 +111,9 @@ PrefabInstance:
       propertyPath: itemImage
       value: 
       objectReference: {fileID: 2800000, guid: baec8e509cffa814d8073d6589eb569a, type: 3}
+    - target: {fileID: 9175846154414339711, guid: 151de5eb8a86c2b449763b04a14842e2, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: dca215ef6735146458713b56605a214a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 151de5eb8a86c2b449763b04a14842e2, type: 3}

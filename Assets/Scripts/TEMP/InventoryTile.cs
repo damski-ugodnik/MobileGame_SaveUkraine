@@ -12,11 +12,11 @@ public class InventoryTile : MonoBehaviour
     [SerializeField] private TMP_Text itemCount;
     [SerializeField] private RawImage itemImage;
 
-    public void InitializeTile(ObservableCollection<Item> items)
+    public void InitializeTile(ObservableCollection<Weapon> items)
     {
-        Item item = items[0];
-        itemName.text = item.itemName;
-        itemCount.text = "x" + items.Count.ToString();
-        itemImage.texture = item.itemImage;
+        //Weapon item = items[0];
+        //itemName.text = item.ItemName;
+        //itemCount.text = "x" + items.Count.ToString();
+        //itemImage.texture = item.ItemImage;
     }
 }

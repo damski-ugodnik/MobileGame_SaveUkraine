@@ -244,6 +244,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17badfe5ba46de9448833ffa64219b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: HIMARS
-  itemDescription: 
-  itemImage: {fileID: 2800000, guid: 001a71843d084f74e874f6a0ecec6032, type: 3}
+  weaponData: {fileID: 11400000, guid: bcb60f366978e4846abb8a44a015556e, type: 2}

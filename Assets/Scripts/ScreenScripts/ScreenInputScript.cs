@@ -11,39 +11,36 @@ public class ScreenInputScript : MonoBehaviour
     [SerializeField] UnityEvent OnScreenZoom = new UnityEvent();
     [SerializeField] GameObject zoomTarget;
     [SerializeField] CanvasGroup canvasGroup;
-    private bool IsZoomed = false;
 
     void Update()
     {
-        //if (Input.touchCount > 0)
-        //{
-        //    Ray inputRay = Camera.main.ScreenPointToRay(Input.touches[0].position);
-           
-
-        //    RaycastHit hit;
-
-        //    if (Physics.Raycast(inputRay, out hit, dist, mask, QueryTriggerInteraction.Ignore))
-        //    {
-        //        if (hit.collider.gameObject != gameObject)
-        //        {
-        //            return;
-        //        }
-        //        if (!IsZoomed)
-        //        {
-        //            CameraMover.Instance.MoveToPoint(zoomTarget);
-        //            OnScreenZoom.Invoke();
-        //            return;
-        //        }
-        //        Debug.Log("yes");
-        //        OnScreenInput.Invoke(hit.textureCoord);
-        //    }
-        //}
-        //else
-        //{
-            Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.touchCount > 0)
+        {
+            Ray inputRay = Camera.main.ScreenPointToRay(Input.touches[0].position);
 
 
             RaycastHit hit;
+
+            if (Physics.Raycast(inputRay, out hit, dist, mask, QueryTriggerInteraction.Ignore))
+            {
+                if (hit.collider.gameObject != gameObject)
+                {
+                    return;
+                }
+                if (!canvasGroup.interactable)
+                {
+                    CameraMover.Instance.MoveToPoint(zoomTarget, OnScreenZoom);
+                    return;
+                }
+                OnScreenInput.Invoke(hit.textureCoord);
+            }
+        }
+        else
+        {
+            Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+
+        RaycastHit hit;
 
         if (Physics.Raycast(inputRay, out hit, dist, mask, QueryTriggerInteraction.Ignore))
         {
@@ -52,15 +49,15 @@ public class ScreenInputScript : MonoBehaviour
                 return;
             }
             Debug.Log("yes");
-            if (!IsZoomed && Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)&& !canvasGroup.interactable)
             {
-                OnScreenZoom.Invoke();
-                CameraMover.Instance.MoveToPoint(zoomTarget);
-                canvasGroup.interactable = true;
+                CameraMover.Instance.MoveToPoint(zoomTarget, OnScreenZoom);
+
                 return;
             }
             OnScreenInput.Invoke(hit.textureCoord);
-            //}
         }
     }
+    }
 }
+
