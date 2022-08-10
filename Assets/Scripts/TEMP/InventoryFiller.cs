@@ -5,12 +5,29 @@ using UnityEngine;
 
 public class InventoryFiller : MonoBehaviour
 {
-    [SerializeField] private InventoryTile tileSample;
+    [SerializeField] private InventoryButtonScript tileSample;
+    private List<InventoryButtonScript> children = new List<InventoryButtonScript> ();
 
-    void Start()
+    public static InventoryFiller Instance
     {
-        foreach (ObservableCollection<Item> col in GoodsHolder.Items)
-            Instantiate(tileSample, transform).InitializeTile(col);
+        get { return FindObjectOfType<InventoryFiller>(); }
+    }
+
+    public void ShowInventory()
+    {
+        foreach (InventoryButtonScript child in children)
+        {
+            Destroy (child.gameObject);
+        }
+        children.Clear ();
+        InventoryButtonScript tmp;
+        foreach (WeaponSerializable weapon in GoodsHolder.Weapons)
+        {
+
+            tmp = Instantiate(tileSample, transform);
+            tmp.InitializeButton(weapon);
+            children.Add(tmp);
+        }
     }
 
 

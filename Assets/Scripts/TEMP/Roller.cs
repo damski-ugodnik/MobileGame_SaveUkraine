@@ -5,44 +5,71 @@ using UnityEngine.UI;
 
 public class Roller : MonoBehaviour
 {
-    [SerializeField] private float maxSpeed = 10f, minSpeed = 1f;
+    [SerializeField] private float maxSpeed, minSpeed;
     [SerializeField] private int boxCapacity = 200;
-    [SerializeField] private List<Item> available;
     [SerializeField] private Crosshairs crosshairs;
     [SerializeField] private ResultingPanel resulting;
-    private List<Item> items = new List<Item>();
+    [SerializeField] private GameObject parentPanel;
+    [SerializeField] private DescrPanel descrPanel;
+    private List<Weapon> items = new List<Weapon>();
     private RectTransform m_RectTransform;
-    
+    private Vector3 startPosition;
+    private bool IsRolling = false;
+
     private void Awake()
     {
         m_RectTransform = GetComponent<RectTransform>();
         m_RectTransform.sizeDelta = new Vector2(boxCapacity * 90, 60);
-        for(int i = 0; i < boxCapacity; i++)
+        startPosition = transform.localPosition;
+    } 
+
+    public void InitializeCase(Crate crate)
+    {
+        Weapon tmp;
+        transform.localPosition = startPosition;
+        for (int i = 0; i < boxCapacity; i++)
         {
-            items.Add(Instantiate(available[Random.Range(0, available.Count )], transform));
+            tmp = Instantiate(crate.AvailableNomenclature[Random.Range(0, crate.AvailableNomenclature.Count)], transform);
+            tmp.gameObject.isStatic = true;
+            items.Add(tmp);
         }
-        Open();
     }
 
-    private void Open()
+    public void Open()
     {
+        if (IsRolling)
+        {
+            return;
+        }
+        IsRolling = true;
+        parentPanel.SetActive(true);
         new WaitForSeconds(5);
+        Debug.Log("start spin");
         StartCoroutine(Spin(Random.Range(minSpeed, maxSpeed)));
     }
 
     private IEnumerator Spin(float speed)
     {
+        Debug.Log(speed);
         while(speed > 0)
         {
-            GetComponent<RectTransform>().localPosition += Vector3.left * speed;
+            GetComponent<RectTransform>().localPosition += Vector3.left * speed*200*Time.deltaTime;
             speed -= Time.deltaTime;
             yield return null;
         }
-        DefinePrize();
+        speed = 0;
+        if(speed == 0)
+        {
+            DefinePrize();
+            IsRolling = false;
+            yield break;
+        }
     }
 
     private void DefinePrize()
     {
-        resulting.Show(crosshairs.lastCollision.GetComponent<Item>());
+        Weapon weapon = crosshairs.lastCollision.GetComponent<Weapon>();
+        resulting.Claim(weapon);
+        descrPanel.Show(weapon.WeaponSerializable);
     }
 }

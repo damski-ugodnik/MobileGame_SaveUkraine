@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e530d93e93850924ba55a9a0f9b3e7c1, type: 3}
+  m_Name: HimarsData
+  m_EditorClassIdentifier: 
+  weaponName: HIMARS
+  weaponDescription: 
+  weaponImage: {fileID: 2800000, guid: 001a71843d084f74e874f6a0ecec6032, type: 3}
+  russiansPerSecond: 5
+  hoursUntilDissapears: 4

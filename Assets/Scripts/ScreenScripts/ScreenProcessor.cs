@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ScreenProcessor : MonoBehaviour
@@ -29,14 +30,17 @@ public class ScreenProcessor : MonoBehaviour
         bool mouseDown = Input.GetMouseButtonDown(0);
         bool mouseUp = Input.GetMouseButtonUp(0);
 
-        foreach(var result in results)
+        foreach (var result in results)
         {
             if (mouseDown)
             {
                 ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.pointerDownHandler);
-            }else if (mouseUp)
+                ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.dragHandler);
+            }
+            else if (mouseUp)
             {
                 ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.pointerUpHandler);
+                ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.endDragHandler);
                 ExecuteEvents.Execute(result.gameObject, pointerEvent, ExecuteEvents.pointerClickHandler);
             }
         }

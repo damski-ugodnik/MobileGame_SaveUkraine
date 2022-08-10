@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/InventoryMenuScene.unity
     guid: 87eee4ec718cc3a45a547ca043c03b2c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: 13c9cc60ff426d640b2ab40787b8b678
+  - enabled: 1
+    path: Assets/Scenes/BomberScene.unity
+    guid: 579730d7cf2922c468a20752ea886042
   m_configObjects: {}

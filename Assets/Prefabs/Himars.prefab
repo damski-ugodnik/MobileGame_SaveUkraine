@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 60}
+  m_SizeDelta: {x: 320, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2162056014423976027
 CanvasRenderer:
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -207,7 +207,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.5500641, y: 0.0337677}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -218,7 +218,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 79.2753, y: 44.205933}
+  m_Size: {x: 320, y: 240}
   m_EdgeRadius: 0
 --- !u!114 &6033085312092024597
 MonoBehaviour:
@@ -244,6 +244,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17badfe5ba46de9448833ffa64219b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: HIMARS
-  itemDescription: 
-  itemImage: {fileID: 2800000, guid: 001a71843d084f74e874f6a0ecec6032, type: 3}
+  weaponData: {fileID: 11400000, guid: bcb60f366978e4846abb8a44a015556e, type: 2}
